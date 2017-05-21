@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import os
 from bs4 import BeautifulSoup
 import requests
@@ -29,12 +29,12 @@ def parse(content, no_request):
         backend_data = mod.parse(soup, no_request)
         data[name] = backend_data
 
-        for key, value in backend_data.items():
+        for key, value in list(backend_data.items()):
             if key in data['global']:
                 data['global'][key] = value
 
         if hasattr(mod, 'MAPPING'):
-            for global_key, backend_key in mod.MAPPING.items():
+            for global_key, backend_key in list(mod.MAPPING.items()):
                 if backend_key in backend_data:
                     data['global'][global_key] = backend_data[backend_key]
 
